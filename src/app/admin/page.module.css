@@ -1,0 +1,57 @@
+.dashboard {
+  padding: 1rem 0;
+}
+
+.title {
+  font-size: 2rem;
+  color: var(--foreground);
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: var(--color-gray-dark);
+  margin-bottom: 3rem;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+}
+
+.statCard {
+  background-color: var(--color-white);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.03);
+  color: var(--foreground);
+}
+
+.statCard h3 {
+  font-size: 1.1rem;
+  color: var(--color-gray-dark);
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.statValue {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+.statDesc {
+  color: var(--color-gray-dark);
+  font-size: 0.9rem;
+}
+
+/* Enforcing light theme regardless of system preference */
+@media (prefers-color-scheme: dark) {
+  .statCard {
+    background-color: var(--color-white);
+    border-color: rgba(0,0,0,0.03);
+  }
+}
