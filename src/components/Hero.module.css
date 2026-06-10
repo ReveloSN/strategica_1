@@ -1,105 +1,138 @@
 .hero {
   position: relative;
-  min-height: 100vh;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 30vh var(--container-padding) 5rem;
+  overflow: hidden;
+}
+
+.brandStage {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  min-height: 62vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  background-color: var(--color-black-soft);
 }
 
-.content {
+.brandmark {
   position: relative;
-  z-index: 10;
   width: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
-  text-align: center;
-}
-
-.textContent {
-  max-width: 900px;
-  padding: 0 1rem;
+  justify-content: center;
+  will-change: transform, opacity;
 }
 
 .title {
-  font-family: var(--font-inter), sans-serif;
-  font-size: clamp(2.5rem, 6vw, 5.5rem);
-  line-height: 1.1;
-  font-weight: 800;
-  color: var(--color-white);
-  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  color: var(--primary);
+  font-family: var(--font-bodoni), Georgia, serif;
+  font-size: clamp(4.5rem, 16vw, 15rem);
+  font-weight: 600;
+  line-height: 0.75;
+  letter-spacing: -0.075em;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.letter {
+  display: inline-block;
+  will-change: transform;
+}
+
+.mutedLetter {
+  color: var(--brand-muted);
+}
+
+.pill {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 70%;
+  height: 140%;
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(196, 199, 199, 0.2);
+  border-radius: 200px;
+  transform: translate(-50%, -50%) rotate(-3deg);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.editorialIntro {
+  max-width: 880px;
+  margin: 40vh auto 0;
+  text-align: center;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.editorialIntro h2 {
+  margin-bottom: 3rem;
+  color: var(--primary);
+  font-family: var(--font-bodoni), Georgia, serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.05;
   letter-spacing: -0.02em;
 }
 
-.accentText {
-  color: var(--color-accent);
-}
-
-.subtitle {
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  color: rgba(255, 255, 255, 0.7);
-  max-width: 700px;
-  margin: 0 auto 3rem;
-  line-height: 1.6;
-}
-
-.buttonGroup {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.introGrid {
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 1.5rem;
-  flex-wrap: wrap;
+  margin-bottom: 3rem;
+  text-align: left;
 }
 
-.primaryButton {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background-color: var(--color-accent);
-  color: var(--color-white);
-  padding: 1rem 2rem;
-  border-radius: 50px;
-  font-weight: 600;
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
-  border: 1px solid var(--color-accent);
+.introGrid p {
+  color: var(--on-surface-variant);
+  font-size: 1rem;
+  line-height: 1.7;
 }
 
-.primaryButton:hover {
-  background-color: transparent;
-  color: var(--color-accent);
-  transform: translateY(-2px);
-}
-
-.secondaryButton {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent;
-  color: var(--color-white);
-  padding: 1rem 2rem;
-  border-radius: 50px;
-  font-weight: 600;
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(10px);
-}
-
-.secondaryButton:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-color: var(--color-white);
-  transform: translateY(-2px);
-}
-
-@media (max-width: 768px) {
-  .buttonGroup {
-    flex-direction: column;
-    gap: 1rem;
+@media (min-width: 768px) {
+  .hero {
+    padding-top: 40vh;
   }
-  .primaryButton, .secondaryButton {
-    width: 100%;
+
+  .brandStage {
+    min-height: 72vh;
+  }
+
+  .editorialIntro {
+    margin-top: 60vh;
+  }
+
+  .introGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding-top: 20vh;
+  }
+
+  .title {
+    font-size: 13.4vw;
+    letter-spacing: -0.07em;
+  }
+
+  .brandStage {
+    min-height: 32vh;
+  }
+
+  .editorialIntro {
+    margin-top: 20vh;
   }
 }

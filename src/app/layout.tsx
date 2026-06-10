@@ -1,15 +1,34 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import {
+  Bodoni_Moda,
+  Hanken_Grotesk,
+  Inter,
+  JetBrains_Mono,
+} from "next/font/google";
 import "./globals.css";
+
+const bodoni = Bodoni_Moda({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const hanken = Hanken_Grotesk({
+  variable: "--font-hanken",
+  subsets: ["latin"],
+  display: "swap",
+});
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const jetbrains = JetBrains_Mono({
+  variable: "--font-jetbrains",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -23,7 +42,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${inter.variable} ${playfair.variable}`}>
+    <html
+      lang="es"
+      className={`${bodoni.variable} ${hanken.variable} ${inter.variable} ${jetbrains.variable}`}
+    >
       <body>{children}</body>
     </html>
   );
