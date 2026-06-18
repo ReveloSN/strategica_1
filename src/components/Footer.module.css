@@ -78,6 +78,12 @@
   opacity: 0.62;
 }
 
+.socialLink {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .bottomBar {
   display: flex;
   flex-direction: column;
@@ -103,15 +109,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff;
-  background-color: #25d366;
+  color: var(--on-primary);
+  background-color: var(--primary);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 999px;
   transition: transform 0.25s ease, background-color 0.25s ease;
 }
 
 .whatsappFloat:hover {
   transform: scale(1.06);
-  background-color: #1fb65a;
+  background-color: #2a2927;
 }
 
 @media (min-width: 760px) {
