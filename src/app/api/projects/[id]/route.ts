@@ -15,6 +15,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
     
     return NextResponse.json(project);
   } catch (error) {
+    console.error("GET error:", error);
     return NextResponse.json({ error: "Error fetching project" }, { status: 500 });
   }
 }
@@ -24,20 +25,32 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
     const { id } = await params;
     const data = await req.json();
     
-    const updatedProject = await prisma.project.update({
-      where: { id },
-      data: {
-        title: data.title,
-        description: data.description,
-        category: data.category,
-        videoUrl: data.videoUrl,
-        coverImage: data.coverImage,
-      },
-    });
-    
-    revalidatePath("/admin/portfolio");
-    return NextResponse.json(updatedProject);
+    try {
+      const updatedProject = await prisma.project.update({
+        where: { id },
+        data: {
+          title: data.title,
+          description: data.description,
+          category: data.category,
+          videoUrl: data.videoUrl,
+          coverImage: data.coverImage,
+        },
+      });
+      
+      try {
+        revalidatePath("/admin/portfolio");
+        revalidatePath("/");
+      } catch (e) {
+        console.error("Revalidate error:", e);
+      }
+      
+      return NextResponse.json(updatedProject);
+    } catch (dbError) {
+      console.error("DB Update error:", dbError);
+      return NextResponse.json({ error: "Project not found or could not be updated" }, { status: 404 });
+    }
   } catch (error) {
+    console.error("PUT error:", error);
     return NextResponse.json({ error: "Error updating project" }, { status: 500 });
   }
 }
@@ -45,13 +58,25 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
 export async function DELETE(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
-    await prisma.project.delete({
-      where: { id },
-    });
+    try {
+      await prisma.project.delete({
+        where: { id },
+      });
+    } catch (dbError) {
+      console.error("DB Delete error:", dbError);
+      // If it doesn't exist, we consider it deleted anyway to avoid 500s on ephemeral DBs
+    }
     
-    revalidatePath("/admin/portfolio");
+    try {
+      revalidatePath("/admin/portfolio");
+      revalidatePath("/");
+    } catch (e) {
+      console.error("Revalidate error:", e);
+    }
+    
     return NextResponse.json({ success: true });
   } catch (error) {
-    return NextResponse.json({ error: "Error deleting project" }, { status: 500 });
+    console.error("DELETE error:", error);
+    return NextResponse.json({ error: "Error deleting project", details: String(error) }, { status: 500 });
   }
 }

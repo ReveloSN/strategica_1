@@ -26,7 +26,12 @@ export async function POST(req: Request) {
         coverImage: data.coverImage,
       },
     });
-    revalidatePath("/admin/portfolio");
+    try {
+      revalidatePath("/admin/portfolio");
+      revalidatePath("/");
+    } catch (e) {
+      console.error("Revalidate error:", e);
+    }
     return NextResponse.json(newProject, { status: 201 });
   } catch (error) {
     return NextResponse.json({ error: "Error creating project" }, { status: 500 });
