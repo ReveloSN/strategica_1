@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 
 export async function GET() {
@@ -24,6 +25,7 @@ export async function POST(req: Request) {
         coverImage: data.coverImage,
       },
     });
+    revalidatePath("/admin/portfolio");
     return NextResponse.json(newProject, { status: 201 });
   } catch (error) {
     return NextResponse.json({ error: "Error creating project" }, { status: 500 });

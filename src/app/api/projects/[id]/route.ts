@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 
 export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
@@ -34,6 +35,7 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
       },
     });
     
+    revalidatePath("/admin/portfolio");
     return NextResponse.json(updatedProject);
   } catch (error) {
     return NextResponse.json({ error: "Error updating project" }, { status: 500 });
@@ -47,6 +49,7 @@ export async function DELETE(req: Request, { params }: { params: Promise<{ id: s
       where: { id },
     });
     
+    revalidatePath("/admin/portfolio");
     return NextResponse.json({ success: true });
   } catch (error) {
     return NextResponse.json({ error: "Error deleting project" }, { status: 500 });
