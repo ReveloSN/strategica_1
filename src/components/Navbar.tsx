@@ -62,9 +62,6 @@ export default function Navbar({ onServicesClick, servicesActive = false }: Navb
               </li>
             ))}
           </ul>
-          <Link href="#contact" className="btn-primary">
-            Hablemos
-          </Link>
         </nav>
 
         <button
@@ -104,15 +101,6 @@ export default function Navbar({ onServicesClick, servicesActive = false }: Navb
                 )}
               </li>
             ))}
-            <li>
-              <Link
-                href="#contact"
-                className="btn-primary"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Hablemos
-              </Link>
-            </li>
           </ul>
         </nav>
       )}

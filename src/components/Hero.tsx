@@ -92,8 +92,8 @@ export default function Hero() {
             No seguimos tendencias; construimos sistemas diseñados para perdurar. Trabajamos en estrecha colaboración con nuestros clientes.
           </p>
         </div>
-        <Link href="#services" className="btn-primary">
-          Saber más
+        <Link href="#contact" className="btn-primary">
+          Contáctanos
         </Link>
       </div>
     </section>
