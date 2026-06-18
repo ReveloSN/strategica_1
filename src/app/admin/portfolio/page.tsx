@@ -1,7 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import styles from "./page.module.css";
 import Link from "next/link";
-import { Plus, Edit2, Trash2, Video } from "lucide-react";
+import { Plus, Video } from "lucide-react";
+import ProjectCard from "./ProjectCard";
 
 export default async function PortfolioAdmin() {
   const projects = await prisma.project.findMany({
@@ -23,27 +24,7 @@ export default async function PortfolioAdmin() {
       <div className={styles.grid}>
         {projects.length > 0 ? (
           projects.map((project) => (
-            <div key={project.id} className={styles.card}>
-              <div className={styles.cardImage}>
-                {project.coverImage ? (
-                  <img src={project.coverImage} alt={project.title} />
-                ) : (
-                  <div className={styles.placeholderImage}><Video size={40} /></div>
-                )}
-              </div>
-              <div className={styles.cardContent}>
-                <h3>{project.title}</h3>
-                <p className={styles.category}>{project.category}</p>
-                <div className={styles.actions}>
-                  <button className={styles.actionBtn} title="Editar">
-                    <Edit2 size={16} />
-                  </button>
-                  <button className={`${styles.actionBtn} ${styles.danger}`} title="Eliminar">
-                    <Trash2 size={16} />
-                  </button>
-                </div>
-              </div>
-            </div>
+            <ProjectCard key={project.id} project={project} />
           ))
         ) : (
           <div className={styles.emptyState}>
