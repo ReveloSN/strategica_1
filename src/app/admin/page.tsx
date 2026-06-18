@@ -3,9 +3,7 @@ import styles from "./page.module.css";
 
 export default async function AdminDashboard() {
   const projectsCount = await prisma.project.count();
-  const casesCount = await prisma.successCase.count();
   const teamCount = await prisma.teamMember.count();
-  const blogCount = await prisma.blogPost.count();
 
   return (
     <div className={styles.dashboard}>
@@ -19,19 +17,9 @@ export default async function AdminDashboard() {
           <p className={styles.statDesc}>Proyectos de video</p>
         </div>
         <div className={styles.statCard}>
-          <h3>Casos de Éxito</h3>
-          <p className={styles.statValue}>{casesCount}</p>
-          <p className={styles.statDesc}>Publicados</p>
-        </div>
-        <div className={styles.statCard}>
           <h3>Equipo</h3>
           <p className={styles.statValue}>{teamCount}</p>
           <p className={styles.statDesc}>Miembros</p>
-        </div>
-        <div className={styles.statCard}>
-          <h3>Blog</h3>
-          <p className={styles.statValue}>{blogCount}</p>
-          <p className={styles.statDesc}>Artículos</p>
         </div>
       </div>
     </div>

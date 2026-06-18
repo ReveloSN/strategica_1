@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { LayoutDashboard, Video, TrendingUp, Users, FileText, Settings, LogOut } from "lucide-react";
+import { LayoutDashboard, Video, Users, Settings, LogOut } from "lucide-react";
 import styles from "./AdminLayout.module.css";
 
 export default function AdminLayout({
@@ -23,14 +23,8 @@ export default function AdminLayout({
           <Link href="/admin/portfolio" className={styles.navLink}>
             <Video size={20} /> Portafolio
           </Link>
-          <Link href="/admin/success-cases" className={styles.navLink}>
-            <TrendingUp size={20} /> Casos de Éxito
-          </Link>
           <Link href="/admin/team" className={styles.navLink}>
             <Users size={20} /> Equipo
-          </Link>
-          <Link href="/admin/blog" className={styles.navLink}>
-            <FileText size={20} /> Blog
           </Link>
           <Link href="/admin/settings" className={styles.navLink}>
             <Settings size={20} /> Configuración
